@@ -98,4 +98,5 @@ No known bugs.
 
 ## AUTHORS
 
-Faber Ruiz, David Agudelo Theran
+Faber Ruiz
+David Agudelo Theran
