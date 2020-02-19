@@ -36,8 +36,8 @@ class Testamenity(unittest.TestCase):
     def test_type(self):
         """ test amenity value type """
         amenity1 = Amenity()
-        self.assertEqual(type(amenity.name), str)
-        self.assertFalse(type(amenity.name), list)
+        self.assertEqual(type(amenity1.name), str)
+        self.assertNotEqual(type(amenity1.name), list)
 
     def test_attribute(self):
         """ amenity test """
