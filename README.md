@@ -1,7 +1,6 @@
 # AirBnB_clone
 
 This project consists in develop a command interpreter to manipulate data without a visual interface, like in a Shell (perfect for development and debugging).
-![enter image description here](https://holbertonintranet.s3.amazonaws.com/uploads/medias/2018/6/65f4a1dd9c51265f49d0.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUZGDONYM4/20200219/us-east-1/s3/aws4_request&X-Amz-Date=20200219T154649Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=edc37bc33b7f9b065220c56bcb16fadf61fac6c199ad0b10011c88eede21a682)
 
 ### The console
 
