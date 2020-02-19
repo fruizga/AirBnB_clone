@@ -44,7 +44,6 @@ class FileStorage:
         except Exception:
             pass
 
-
-def delete_obj(self):
-    """Deletes all"""
-    FileStorage.__objects.clear()
+    def delete_obj(self):
+        """Deletes all"""
+        FileStorage.__objects.clear()
