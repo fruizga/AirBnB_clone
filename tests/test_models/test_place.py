@@ -64,3 +64,21 @@ class Testplace(unittest.TestCase):
             self.assertTrue(type(my_place.longitude), float)
             self.assertEqual(my_place.amenity_ids, str(my_amenity.id))
             self.assertTrue(type(my_place.amenity_ids), str)
+
+    def test_type(self):
+        """ place type test """
+        my_place = Place()
+        self.assertEqual(type(my_place.user_id), str)
+        self.assertEqual(type(my_place.number_rooms), int)
+        self.assertEqual(type(my_place.amenity_ids), list)
+
+    def test_value(self):
+        """ place value test """
+        my_place = Place()
+        self.assertEqual(my_place.city_id, "")
+        self.assertEqual(my_place.name, "")
+        self.assertFalse(my_place.description, "CTG.13001")
+        self.assertEqual(my_place.number_rooms, 0)
+
+if __name__ == '__main__':
+    unittest.main()

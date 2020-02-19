@@ -1,0 +1,43 @@
+#!/usr/bin/python3
+""" City Class Unittest """
+import unittest
+import models
+from models.place import Place
+
+
+class TestPlaceClass(unittest.TestCase):
+    """ testing place class """
+
+    def test_place_attr(self):
+        """ place test """
+        my_place = Place()
+        self.assertTrue(hasattr(my_place, "city_id"))
+        self.assertTrue(hasattr(my_place, "user_id"))
+        self.assertTrue(hasattr(my_place, "name"))
+        self.assertTrue(hasattr(my_place, "description"))
+        self.assertTrue(hasattr(my_place, "number_rooms"))
+        self.assertTrue(hasattr(my_place, "number_bathrooms"))
+        self.assertTrue(hasattr(my_place, "max_guest"))
+        self.assertTrue(hasattr(my_place, "price_by_night"))
+        self.assertTrue(hasattr(my_place, "latitude"))
+        self.assertTrue(hasattr(my_place, "longitude"))
+        self.assertTrue(hasattr(my_place, "amenity_ids"))
+        self.assertFalse(hasattr(my_place, "area"))
+
+    def test_place_value(self):
+        """ place value test """
+        my_place = Place()
+        self.assertEqual(my_place.city_id, "")
+        self.assertEqual(my_place.name, "")
+        self.assertFalse(my_place.description, "CTG.13001")
+        self.assertEqual(my_place.number_rooms, 2)
+
+    def test_place_type(self):
+        """ place value type test """
+        my_place = Place()
+        self.assertEqual(type(my_place.user_id), str)
+        self.assertEqual(type(my_place.number_rooms), int)
+        self.assertEqual(type(my_place.amenity_ids), list)
+
+if __name__ == '__main__':
+    unittest.main()
