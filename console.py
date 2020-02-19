@@ -20,13 +20,13 @@ class HBNBCommand(cmd.Cmd):
                "State", "City", "Amenity"}
 
     def do_quit(self, line):
-        """Quit command to exit the program"""
-        print("Bye")
+        """Quit command to exit the program
+        """
         return True
 
     def do_EOF(self, line):
         """Exit the program"""
-        print()
+        print("")
         return True
 
     def emptyline(self):
@@ -97,8 +97,7 @@ class HBNBCommand(cmd.Cmd):
                 if new_list[0] not in self.classes:
                     print("** class doesn't exist **")
                     break
-                else:
-                    new_list[0] == obj[key].__class__.__name__
+                if obj[key].__class__.__name__ == new_list[0]:
                     print(obj[key])
             else:
                 print(obj[key])
