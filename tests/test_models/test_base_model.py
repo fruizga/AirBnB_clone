@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 """test for the BaseModel class"""
-
-
 import unittest
 from datetime import datetime
 import uuid
