@@ -15,7 +15,6 @@ from models import storage
 class HBNBCommand(cmd.Cmd):
     """class definition"""
     prompt = "(hbnb) "
-    intro = "Welcome! Type ? or help to list commands"
     classes = {"BaseModel", "User", "Review", "Place",
                "State", "City", "Amenity"}
 
@@ -25,12 +24,14 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_EOF(self, line):
-        """Exit the program"""
+        """Exit the program
+        """
         print("")
         return True
 
     def emptyline(self):
-        """shouldn’t execute anything"""
+        """shouldn’t execute anything
+        """
         pass
 
     def do_create(self, line):
