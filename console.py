@@ -127,7 +127,7 @@ class HBNBCommand(cmd.Cmd):
         elif len(new_list) < 4:
             print("** value missing **")
             return
-        if len(new_list) > 4:
+        if len(new_list) >= 4:
             new_list = new_list[:4]
 
         try:
