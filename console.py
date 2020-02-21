@@ -176,7 +176,7 @@ class HBNBCommand(cmd.Cmd):
                         nam = cmmd.split("(")[1].split(", ")[1].strip(')"')
                         atr = cmmd.split("(")[1].split(", ")[2].strip(')"')
                         join = nn + " " + mod + " " + nam + " " + atr
-                        self.do_update(concat)
+                        self.do_update(join)
                     elif len(cmmd.split("(")[1].split(", {")) == 2:
                         bm = cmmd.split("(")[1].split(", {")[0].strip(')"')
                         s = cmmd.split("(")[1].split(", {")[1].strip(")")
