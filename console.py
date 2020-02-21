@@ -183,7 +183,7 @@ class HBNBCommand(cmd.Cmd):
                         rep = eval("{" + s)
                         for key, value in rep.items():
                             join = nn + " " + bm + " " + key + " " + str(value)
-                            self.do_update(concat)
+                            self.do_update(join)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
