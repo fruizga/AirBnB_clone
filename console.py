@@ -11,12 +11,15 @@ from models.state import State
 from models.amenity import Amenity
 from models import storage
 
+classes = {"BaseModel", "User", "Review", "Place",
+           "State", "City", "Amenity"}
+
 
 class HBNBCommand(cmd.Cmd):
     """class definition"""
     prompt = "(hbnb) "
-    classes = {"BaseModel", "User", "Review", "Place",
-               "State", "City", "Amenity"}
+    """classes = {"BaseModel", "User", "Review", "Place",
+               "State", "City", "Amenity"}"""
 
     def do_quit(self, line):
         """Quit command to exit the program
@@ -41,7 +44,7 @@ class HBNBCommand(cmd.Cmd):
         """
         if not line:
             print("** class name missing **")
-        elif line not in self.classes:
+        elif line not in classes:
             print("** class doesn't exist **")
         else:
             new_one = eval(line)()
@@ -56,7 +59,7 @@ class HBNBCommand(cmd.Cmd):
         new_list = line.split()
         if not line:
             print("** class name missing **")
-        elif new_list[0] not in self.classes:
+        elif new_list[0] not in classes:
             print("** class doesn't exist **")
         elif len(new_list) < 2:
             print("** instance id missing **")
@@ -73,7 +76,7 @@ class HBNBCommand(cmd.Cmd):
         new_list = line.split()
         if not line:
             print("** class name missing **")
-        elif new_list[0] not in self.classes:
+        elif new_list[0] not in classes:
             print("** class doesn't exist **")
         elif len(new_list) < 2:
             print("** instance id missing **")
@@ -95,7 +98,7 @@ class HBNBCommand(cmd.Cmd):
         obj = storage.all()
         for key in obj.keys():
             if new_list:
-                if new_list[0] not in self.classes:
+                if new_list[0] not in classes:
                     print("** class doesn't exist **")
                     break
                 if obj[key].__class__.__name__ == new_list[0]:
@@ -111,7 +114,7 @@ class HBNBCommand(cmd.Cmd):
         new_list = line.split()
         if not line:
             print("** class name missing **")
-        elif new_list[0] not in self.classes:
+        elif new_list[0] not in classes:
             print("** class doesn't exist **")
         elif len(new_list) < 2:
             print("** instance id missing **")
@@ -125,11 +128,55 @@ class HBNBCommand(cmd.Cmd):
         elif len(new_list) < 4:
             print("** value missing **")
         else:
-            obj = storage.all()
-            key = new_list[0] + "." + new_list[1]
-            if key in obj:
-                setattr(obj[key], obj[2], new_list[3])
-                storage.save()
+            try:
+                setattr(obj, new_list[2], eval(new_list[3].strip('"')))
+            except:
+                setattr(obj, new_list[2], new_list[3].strip('"'))
+            storage.save()
+
+    def count(self, name):
+        """retrieve the number of instances of a class"""
+        obj = storage.all()
+        objs = 0
+        for key in obj.keys():
+            if key.split(".")[0] == name:
+                objs += 1
+        print(objs)
+
+    def default(self, line):
+        new_list = line.split(".")
+        name = new_list[0]
+        if name in classes and len(new_list) > 1:
+            cmmd = new_list[1]
+            if cmmd in ['all()', 'count()']:
+                if cmmd == "all()":
+                    self.do_all(name)
+                elif cmmd == "count()":
+                    self.count(name)
+            else:
+                if "show" in cmmd:
+                    new_id = cmmd.split("(")[1].strip(")")
+                    join = name + " " + new_id
+                    self.do_show(join)
+                elif "destroy" in cmmd:
+                    new_id = cmmd.split("(")[1].strip(')"')
+                    join = name + " " + new_id
+                    self.do_destroy(join)
+                elif "update" in cmmd:
+                    nn = name
+                    if "{" not in cmmd.split("(")[1]:
+                        mod = cmmd.split("(")[1].split(", ")[0].strip(')"')
+                        nam = cmmd.split("(")[1].split(", ")[1].strip(')"')
+                        atr = cmmd.split("(")[1].split(", ")[2].strip(')"')
+                        join = nn + " " + mod + " " + nam + " " + atr
+                        self.do_update(concat)
+                    elif len(cmmd.split("(")[1].split(", {")) == 2:
+                        bm = cmmd.split("(")[1].split(", {")[0].strip(')"')
+                        s = cmmd.split("(")[1].split(", {")[1].strip(")")
+                        rep = eval("{" + s)
+                        for key, value in rep.items():
+                            join = nn + " " + bm + " " + key + " " + str(value)
+                            self.do_update(concat)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
