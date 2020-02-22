@@ -110,36 +110,32 @@ class HBNBCommand(cmd.Cmd):
         id by adding or updating attribute
         """
         new_list = line.split()
-        obj = storage.all()
         if not line:
             print("** class name missing **")
-        elif new_list[0] not in classes:
+            return
+        if new_list[0] not in classes:
             print("** class doesn't exist **")
-        elif len(new_list) < 2:
+            return
+        if len(new_list) < 2:
             print("** instance id missing **")
-        elif len(new_list) < 3:
-            """obj = storage.all()"""
-            key = new_list[0] + "." + new_list[1]
-            if key not in obj:
-                print("** no instance found **")
-            else:
-                print("** attribute name missing **")
-        elif len(new_list) < 4:
+            return
+        obj = storage.all()
+        key = new_list[0] + "." + new_list[1]
+        if key not in obj:
+            print("** no instance found **")
+            return
+        if len(new_list) < 3:
+            print("** attribute name missing **")
+            return
+        if len(new_list) < 4:
             print("** value missing **")
             return
-        if len(new_list) >= 4:
-            new_list = new_list[:4]
-
+        ins = obj[key]
         try:
-            ins_id = "{0}.{1}".format(new_list[0], new_list[1])
-            if new_list[0] in classes:
-                if ins_id in obj.keys():
-                    storage.reload()
-                    obj[ins_id].__dict__[
-                        new_list[2]] = new_list[3].replace('\"', '')
-                    storage.save()
-        except:
-            pass
+            ins.__dict__[new_list[2]] = eval(new_list[3])
+        except Exception:
+            ins.__dict__[new_list[2]] = new_list[3]
+            ins.save()
 
     def count(self, name):
         """retrieve the number of instances of a class"""
